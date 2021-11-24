@@ -56,6 +56,41 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+class TodosScreen extends StatelessWidget {
+  // Requiring the list of todos.
+  const TodosScreen({Key? key, required this.todos}) : super(key: key);
+
+  final List<Todo> todos;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Todos'),
+      ),
+      //passing in the ListView.builder
       body: ListView.builder(
         itemCount: todos.length,
         itemBuilder: (context, index) {
@@ -65,6 +100,5 @@ class _MyHomePageState extends State<MyHomePage> {
         },
       ),
     );
-
-
+  }
 }
