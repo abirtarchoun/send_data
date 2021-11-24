@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
 class Todo {
   final String title;
   final String description;
 
   const Todo(this.title, this.description);
 }
-final todos = List.generate(
-  20,
-      (i) => Todo(
-    'Todo $i',
-    'A description of what needs to be done for Todo $i',
-  ),
-);
+void main() {
+  runApp(
+    MaterialApp(
+      title: 'Passing Data',
+      home: TodosScreen(
+        todos: List.generate(
+          20,
+              (i) => Todo(
+            'Todo $i',
+            'A description of what needs to be done for Todo $i',
+          ),
+        ),
+      ),
+    ),
+  );
+}
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -96,8 +102,30 @@ class TodosScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           return ListTile(
             title: Text(todos[index].title),
+
           );
         },
+      ),
+    );
+  }
+}
+class DetailScreen extends StatelessWidget {
+  // In the constructor, require a Todo.
+  const DetailScreen({Key? key, required this.todo}) : super(key: key);
+
+  // Declare a field that holds the Todo.
+  final Todo todo;
+
+  @override
+  Widget build(BuildContext context) {
+    // Use the Todo to create the UI.
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(todo.title),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Text(todo.description),
       ),
     );
   }
